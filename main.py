@@ -3,7 +3,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from crewai import Agent, Task, Crew, Process, LLM
 
 import os 
-os.environ["GOOGLE_API_KEY"] = "AIzaSyB5GbFHmmGrVjo35T5rm6MQ2Ghu1ZD9Vz8"
+os.environ["GOOGLE_API_KEY"] = "INSIRA AQUI SUA API"
 print("funcionou")
 
 llm =  LLM(model='gemini/gemini-2.0-flash-lite', verbose=True, temperature=0.4, api_key = os.environ["GOOGLE_API_KEY"])
