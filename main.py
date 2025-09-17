@@ -1,13 +1,20 @@
+#Importa a integração do LangChain com os modelos da Google Generative AI
 from langchain_google_genai import ChatGoogleGenerativeAI
 
+#importa as calsses do crewai, o llm define o modelo de linguagem a ser usado
 from crewai import Agent, Task, Crew, Process, LLM
 
-import os 
-os.environ["GOOGLE_API_KEY"] = "INSIRA AQUI SUA API"
+#configura o ambiente para usar a api do gogole
+import os
+os.environ["GOOGLE_API_KEY"] = "AIzaSyB5GbFHmmGrVjo35T5rm6MQ2Ghu1ZD9Vz8"
 print("funcionou")
 
+
+#cria uma instancia no modelo llm, temperature é a "criatividade", quanto mais baixo mais objetivo
 llm =  LLM(model='gemini/gemini-2.0-flash-lite', verbose=True, temperature=0.4, api_key = os.environ["GOOGLE_API_KEY"])
 
+
+#definindo os agentes
 especialista_imagem = Agent(
     role = "Diretor de Arte",
     goal = "Analisar aparência estética do filme: maguaigem, fotografia, cores, figurino",
@@ -40,6 +47,7 @@ especialista_redator = Agent(
     llm = llm
 )
 
+#definindo as tarefas de cada agente
 tarefa_critica_visual = Task(
     description = "Reunir informações sobre a qualidade dos aspectos visuais do filme Ressaca de Amor",
     expected_output = "Um resumo detalhado em português sobre os aspectos do visual do filme.",
@@ -66,6 +74,7 @@ tarefa_redacao = Task(
 )
 
 
+#motando a "gangue"
 crew = Crew(
     agents = [especialista_imagem, especialista_som, especialista_roteiro, especialista_redator],
     tasks = [tarefa_critica_visual, tarefa_critica_audio, tarefa_critica_atuacao, tarefa_redacao],
@@ -73,7 +82,9 @@ crew = Crew(
     verboose = True
 )
 
+#startando
 resultado = crew.kickoff()
 
+#printando o resultado
 print(resultado)
 
