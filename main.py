@@ -6,7 +6,7 @@ from crewai import Agent, Task, Crew, Process, LLM
 
 #configura o ambiente para usar a api do gogole
 import os
-os.environ["GOOGLE_API_KEY"] = "AIzaSyB5GbFHmmGrVjo35T5rm6MQ2Ghu1ZD9Vz8"
+os.environ["GOOGLE_API_KEY"] = ""
 print("funcionou")
 
 
